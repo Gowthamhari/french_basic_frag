@@ -138,23 +138,12 @@ public class PhrasesFragment extends Fragment {
     }
 
     @Override
-    public void onDestroy() {
-        try {
-            save();
-            super.onDestroy();
-        } catch (Exception e){
-            Log.e("message", String.valueOf(e));
-        }
+    public void onResume() {
+        super.onResume();
+        ((MainActivity)getActivity()).setFragmentPosition(fragmentPosition);
     }
-    private void save() {
-        int position = fragmentPosition;
-        if(sf!=null) {
-            SharedPreferences.Editor editor = sf.edit();
-            editor.putInt(saveIt, position);
-            editor.commit();
-        }
 
-    }
+
     //java.lang.NullPointerException: Attempt to invoke interface method 'android.content.SharedPreferences$Editor android.content.SharedPreferences.edit()' on a null object reference
 
     private void releaseMediaPlayer() {
