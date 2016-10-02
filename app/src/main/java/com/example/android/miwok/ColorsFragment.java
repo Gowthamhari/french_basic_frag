@@ -137,7 +137,13 @@ public class ColorsFragment extends Fragment {
         releaseMediaPlayer();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((MainActivity)getActivity()).setFragmentPosition(fragmentPosition);
+    }
 
+    /*
     @Override
     public void onDestroy() {
 
@@ -158,7 +164,7 @@ public class ColorsFragment extends Fragment {
             editor.putInt(saveIt, position);
             editor.commit();
         }
-    }
+    }*/
 
     private void releaseMediaPlayer() {
         // If the media player is not null, then it may be currently playing a sound.

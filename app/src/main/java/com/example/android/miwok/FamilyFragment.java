@@ -135,6 +135,12 @@ public class FamilyFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        ((MainActivity)getActivity()).setFragmentPosition(fragmentPosition);
+    }
+
+    /*@Override
     public void onDestroy() {
         try {
             save();
@@ -155,7 +161,7 @@ public class FamilyFragment extends Fragment {
             editor.putInt(saveIt, position);
             editor.commit();
         }
-    }
+    }*/
 
     private void releaseMediaPlayer() {
         // If the media player is not null, then it may be currently playing a sound.
