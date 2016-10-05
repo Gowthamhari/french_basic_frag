@@ -17,7 +17,14 @@
             </intent-filter>
         </activity>
 
+         <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="06ac4c11d791a282ab173b5fd6d6f2d877c302c5" />
+
+
 
     </application>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

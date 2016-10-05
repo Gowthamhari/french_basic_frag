@@ -8,6 +8,14 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.Toast;
+
+import com.crashlytics.android.Crashlytics;
+import io.fabric.sdk.android.Fabric;
+
+import com.crashlytics.android.Crashlytics;
+
+import io.fabric.sdk.android.Fabric;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        Fabric.with(this, new Crashlytics());
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
 
@@ -40,16 +48,21 @@ public class MainActivity extends AppCompatActivity {
 
         sf = getSharedPreferences(preference,Context.MODE_PRIVATE);
 
-        if (sf.contains(saveIt)){
+        int pos = sf.getInt(saveIt, 1);
+        viewPager.setCurrentItem(pos-1);
+
+
+        /*if (sf.contains(saveIt)){
             viewPager.getCurrentItem();
 
-        }
+        }*/
 
 
     }
 
     public void setFragmentPosition(int position) {
         fragmentPosition = position;
+        //Toast.makeText(this, "position : "+fragmentPosition, Toast.LENGTH_SHORT).show();
     }
 
 
@@ -57,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
     public void onDestroy() {
         try {
             save();
+            Toast.makeText(this, "Destroying...", Toast.LENGTH_SHORT).show();
             super.onDestroy();
         } catch (Exception e){
             Log.e("message", String.valueOf(e));
@@ -68,6 +82,8 @@ public class MainActivity extends AppCompatActivity {
             SharedPreferences.Editor editor = sf.edit();
             editor.putInt(saveIt, position);
             editor.commit();
+        } else {
+            Toast.makeText(this, "sf is null", Toast.LENGTH_SHORT).show();
         }
 
     }
